@@ -1,2 +1,2 @@
 # unixuniverse
-Projetos em Python com foco em sistemas Embarcados!
+Projetos com foco em sistemas Embarcados!
