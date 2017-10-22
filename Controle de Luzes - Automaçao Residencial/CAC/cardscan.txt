@@ -1,0 +1,19 @@
+PC/SC device scanner
+V 1.4.25 (c) 2001-2011, Ludovic Rousseau <ludovic.rousseau@free.fr>
+Compiled with PC/SC lite version: 1.8.14
+Using reader plug'n play mechanism
+Scanning present readers...
+0: CASTLES EZCCID Smart Card Reader 00 00
+
+Thu Mar 16 23:33:54 2017
+Reader 0: CASTLES EZCCID Smart Card Reader 00 00
+  Card state: Card inserted, Unresponsive card, 
+
+Thu Mar 16 23:35:20 2017
+Reader 0: CASTLES EZCCID Smart Card Reader 00 00
+  Card state: Card removed, 
+
+Thu Mar 16 23:35:24 2017
+Reader 0: CASTLES EZCCID Smart Card Reader 00 00
+  Card state: Card inserted, 
+  ATR: 3B 79 18 00 00 42 72 61 7A 49 44 65 61 6C

@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+import RPi.GPIO as GPIO
+import tkinter
+import time
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+GPIO.setup(18, GPIO.OUT) #Principal
+
+GPIO.output(18, False)
+time.sleep(0.5)
+
+
