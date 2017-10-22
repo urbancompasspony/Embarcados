@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import time
+import tkinter
+import subprocess
+
+# Criar nova janela
+window = tkinter.Tk()
+
+# Criar título para a janela
+window.title("LChat4Pi")
+
+# Variáveis Globais
+chat =0
+tahc = 0
+
+# Funções
+def conectar():
+    btn0.configure(text="Conectado!")
+    
+def enviar():
+    # Enviar Mensagem Atual
+    HOST="pi:raspberry@raspberrypi.local"
+    COMMAND="echo '" + ent1.get() + ": " + ent0.get() + "'>> /home/pi/LChatPi/chat"
+
+    ssh = subprocess.Popen(["ssh", "%s" % HOST, COMMAND],
+                       shell=False,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE)
+    result = ssh.stdout.readlines()
+    
+    if result == []:
+        error = ssh.stderr.readlines()
+        print (error)
+    else:
+        print (result)
+        lbl3.configure(text=result)
+
+    # Receber as Ultimas 5 Linhas
+    COMMAND="tail -n 5 /home/pi/LChatPi/chat"
+    ssh = subprocess.Popen(["ssh", "%s" % HOST, COMMAND],
+                       shell=False,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE)
+    result = ssh.stdout.readlines()
+    
+    if result == []:
+        error = ssh.stderr.readlines()
+        print (error)
+    else:
+        print (result)
+        lbl3.configure(text=result)
+
+def nick():
+    btn2.configure(text="")
+
+def call():
+    HOST="pi:raspberry@raspberrypi.local"
+    COMMAND="python3 /home/pi/LChatPi/call"
+
+    ssh = subprocess.Popen(["ssh", "%s" % HOST, COMMAND],
+                       shell=False,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE)
+    result = ssh.stdout.readlines()
+    
+    if result == []:
+        error = ssh.stderr.readlines()
+        print (error)
+    else:
+        print (result)
+        lbl3.configure(text=result)
+
+def fechar():
+    print("")
+
+# Pós Execução
+
+# Definir tamanho da janela do programa
+window.geometry("350x270")
+
+# Criação dos Itens a serem Usados
+lbl0 = tkinter.Label(window, text=" ")
+lbl1 = tkinter.Label(window, text=" ")
+lbl2 = tkinter.Label(window, text=" ")
+lbl3 = tkinter.Label(window, width=30, text="--- Chat ---") # MSG wraplength=150
+lbl4 = tkinter.Label(window, text=" ")
+lbl5 = tkinter.Label(window, text=" ")
+lbl6 = tkinter.Label(window, text=" ")
+lbl7 = tkinter.Label(window, text=" ")
+
+ent0 = tkinter.Entry(window, width=30)
+ent1 = tkinter.Entry(window, width=30)
+
+btn0 = tkinter.Button(window, text="Chamar Atenção!", command=call)
+btn1 = tkinter.Button(window, text="Enviar", command=enviar)
+btn2 = tkinter.Button(window, text="<< Nick", command=nick)
+#btn3 = tkinter.Button(window, text="Fechar", command=fechar)
+
+# Layout - Disposição dos Itens Criados Acima
+ent1.grid(row = 0, column = 0)
+btn2.grid(row = 0, column = 1)#, columnspan = 1)
+
+lbl0.grid(row = 1, column = 0)#, columnspan = 1)
+#lbl1.grid(row = 2, column = 0)#, columnspan = 1)
+#lbl2.grid(row = 3, column = 0)#, columnspan = 1)
+lbl3.grid(row = 4, column = 0)#, columnspan = 1)
+lbl4.grid(row = 6, column = 0)#, columnspan = 1)
+#lbl5.grid(row = 7, column = 0)#, columnspan = 1)
+#lbl6.grid(row = 8, column = 0)#, columnspan = 1)
+
+ent0.grid(row = 9, column = 0)
+btn1.grid(row = 9, column = 1)#, columnspan = 1)
+lbl7.grid(row = 10, column = 0)#, columnspan = 1)
+
+btn0.grid(row = 11, column = 0)#, columnspan = 1)
+#btn3.grid(row = 11, column = 1)#, columnspan = 1)
+
+
+# Manter janela aberta
+window.mainloop()
