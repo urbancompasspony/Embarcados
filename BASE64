@@ -1,0 +1,9 @@
+Will be useful someday:
+
+Convert and revert any .tar, .zip, .jpg, .txt, .doc, .etc from file to string and back to file!
+
+Convert:
+$ base64 input.jpg > text.txt
+
+Revert:
+$ cat text.txt | base64 -d > output.jpg
